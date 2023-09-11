@@ -20,6 +20,13 @@ int check_arg(int ac, char **argv)
     return (1);
 }
 
+t_info	*get_info(void)
+{
+	static t_info	info;
+
+	return (&info);
+}
+
 
 int main(int argc, char **argv)
 {
@@ -28,6 +35,7 @@ int main(int argc, char **argv)
     t_info      *info;
 
     i = 0;
+    info = get_info();
     if (argc < 5 || argc > 6)
     {
         printf("Nombre d'arg incorrect");
@@ -42,7 +50,6 @@ int main(int argc, char **argv)
     if (!philo)
         return (0);
     init_all(argv,argc,philo,info);
-   // info->time_die = 5;
     
     return 1;
 }
