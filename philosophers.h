@@ -11,6 +11,7 @@
 typedef struct s_philo {
 	int					id;
 	long int			nb_eat;
+	long int			last_eat;
 	pthread_t			t_id;
 	pthread_mutex_t    *forks_r;
 	pthread_mutex_t    forks_l;
@@ -20,10 +21,14 @@ typedef struct s_info {
 
     int					die;
 	int					nb_philo;
-	int			time_die;
-	int			time_eat;
-	int			time_sleep;
-	pthread_mutex_t 		*fork;
+	size_t			time_start;
+	size_t			time_die;
+	size_t			time_eat;
+	size_t			time_sleep;
+	pthread_mutex_t		*fork;
+	pthread_mutex_t		print_lock;
+	pthread_mutex_t		dead_lock;
+	pthread_mutex_t		eat_lock;
 
 }           t_info;
 
@@ -34,6 +39,8 @@ int     init_info(char **argv, char argc, t_info *info, t_philo *philo);
 void    init_all(char **argv, int argc, t_philo *philo, t_info *info);
 void *routine_philo(void *data);
 int    init_thread(t_info *info, t_philo *philo);
-
+int	ft_usleep(long time);
+long	get_current_time(void);
+t_info	*get_info(void);
 
 #endif
